@@ -4,7 +4,7 @@ export default {
         initialRoute: true,
         title:' ',
         component:require('./Main').default,
-        actions:[{icon:'location-on'}],
+        actions:[{icon:'location-on',info:'成都'}],
         children:{
             HospitalList:{
                 title:'医院列表',

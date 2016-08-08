@@ -23,3 +23,18 @@ const yyArray=[
 ]
 
 export {yyArray}
+
+const departmentArray=[
+  {name:'neike1',key:1,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:2,children:[{name:'ni2',key:'2'},{name:'ni3',key:'3'}]},
+  {name:'neike1',key:3,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:4,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:5,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:6,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:7,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:8,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:9,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:10,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
+  {name:'neike1',key:11,children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]}
+]
+export {departmentArray}

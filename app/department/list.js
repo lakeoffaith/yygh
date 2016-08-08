@@ -4,47 +4,71 @@ import {
     Text,
     Dimensions,
     ScrollView,
-    TouchableWithoutFeedback
+    ListView,
+    TouchableHighlight
 }from 'react-native'
 import {Icon} from 'react-native-material-design'
 import {primaryText,secondaryText,accentColor,dividerColor,lightColor} from '../data'
 const h=Dimensions.get('window').height;
+import {departmentArray} from "../data"
 export default class DepartmentList extends React.Component {
         constructor() {
             super();
+            const ds=new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2});
             this.state = {
+                selectDepartmentItemKey:1,
+                childrenData:[],
+                dataSource:ds.cloneWithRows(this._genRows({})),
                 data: [{key:'n1',name: '心血管内科'}, {key:'n2',name: '感染科消化'}, {key:'n3',name: '呼吸内科'}]
             }
         }
-        _changeItem()
-        {
-            this.setState({data: [{key:'w1',name: '普通外科'}, {key:'w2',name: '胸外科'}]})
+        _pressData={}
+        componentWillMount(){
+          this._pressData={};
         }
-        render()
-        {
+        _genRows(pressData){
+          const dataBlob=[];
+          for(var d in departmentArray){
+            if(pressData[departmentArray[d].key]==true){
+              departmentArray[d].onPressed=true;
+            }
+            dataBlob.push(departmentArray[d]);
+          }
+          return dataBlob;
+        }
+        _pressRow(rowData){
+          this._pressData[rowData.key]=!this._pressData[rowData.key];
+          this.setState({dataSource:this.state.dataSource.cloneWithRows(this._genRows(this._pressData))});
+        }
+        _renderRow(rowData){
+
+          return (
+            <TouchableHighlight onPress={()=>this._pressRow(rowData)}>
+                <View style={{height:60,alignItems:'center',backgroundColor:'white',flexDirection:'row',borderBottomWidth:0.5,justifyContent:'center'}}>
+                    {rowData.onPressed?
+                      <View style={{width:20,position:'absolute',left:5,top:20}}><Icon name="play-arrow" size={18}/></View>
+                      :null}
+                    <View><Text style={{color:primaryText}}>{rowData.name}</Text></View>
+                </View>
+            </TouchableHighlight>
+
+          );
+        }
+
+
+
+        render(){
             return (
                 <View style={{flexDirection:'row'}}>
                     <View style={{width:120,height:h-60,backgroundColor:lightColor}}>
-                        <ScrollView >
-                            <View style={{height:60,alignItems:'center',borderBottomWidth:0.5,justifyContent:'center'}}>
-                                <View style={{width:20}}></View>
-                                <View><Text style={{color:primaryText}}>内科</Text></View>
-                            </View>
-                            <TouchableWithoutFeedback onPress={()=>this._changeItem()}>
-                                <View style={{height:60,alignItems:'center',backgroundColor:'white',flexDirection:'row',borderBottomWidth:0.5,justifyContent:'center'}}>
-                                    <View style={{width:20,position:'absolute',left:5,top:20}}><Icon name="play-arrow" size={18}/></View>
-                                    <View><Text style={{color:primaryText}}>外科</Text></View>
-                                </View>
-                            </TouchableWithoutFeedback>
-                            <View style={{height:60,alignItems:'center',justifyContent:'center'}}>
-                                <Text style={{color:primaryText}}>骨科</Text>
-                            </View>
-                            <View style={{height:60,alignItems:'center',justifyContent:'center'}}>
-                                <Text style={{color:primaryText}}>妇产科</Text>
-                            </View>
-                        </ScrollView>
+
+                        <ListView
+                          dataSource={this.state.dataSource}
+                          renderRow={this._renderRow.bind(this)}>
+                          </ListView>
+
                     </View>
-                    <DetailDep style={{backgroundColor:'blue'}} data={this.state.data}/>
+                    <DetailDep style={{backgroundColor:'blue'}} data={this.state.childrenData}/>
                 </View>
             );
         }
