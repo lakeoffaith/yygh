@@ -3,6 +3,7 @@ import{
     View,
     Text,
     Image,
+    StyleSheet,
     TouchableWithoutFeedback
 } from 'react-native'
 import {MKRadioButton} from 'react-native-material-kit'
@@ -23,11 +24,11 @@ export default class SureYy extends React.Component{
                   <View style={{marginLeft:10}}><Text>医生：李大宝</Text></View>
               </View>
               <View style={{marginLeft:5}}>
-                  <Text>就诊医院</Text>
-                  <Text>就诊科室</Text>
-                  <Text>门诊时间</Text>
-                  <Text>门诊类型</Text>
-                  <Text>挂号费</Text>
+                  <View style={styles.item}><Text>就诊医院:<Text>成都军区医院</Text></Text></View>
+                  <View style={styles.item}><Text>就诊科室:<Text>皮肤科</Text></Text></View>
+                  <View style={styles.item}><Text>门诊时间:<Text>2016-08-08 8:00-16:00</Text></Text></View>
+                  <View style={styles.item}><Text>门诊类型:<Text>普通号</Text></Text></View>
+                  <View style={styles.item}><Text>挂号费:<Text>8元</Text></Text></View>
               </View>
               <View style={{marginTop:5,marginLeft:5,flexDirection:'row',height:30,alignItems:'center'}}>
                   <MKRadioButton checked={true} />
@@ -46,3 +47,12 @@ export default class SureYy extends React.Component{
         );
     }
 }
+const styles=StyleSheet.create({
+  item:{
+    height:40,
+    marginTop:5,
+    flexDirection:'row',
+    paddingLeft:30,
+    alignItems:'center'
+  }
+});

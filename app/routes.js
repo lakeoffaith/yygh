@@ -10,6 +10,9 @@ export default {
                 title:'医院列表',
                 component:require('./hospital/list').default,
                 children:{
+                  search:{
+                    component:require('./search').default
+                  },
                     DepartmentList:{
                         title:'成都军区医院',
                         component:require('./department/list').default,
@@ -40,5 +43,6 @@ export default {
         title:'挂号预约列表',
         component:require('./yy/list').default
     }
+
 
 }
