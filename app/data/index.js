@@ -1,4 +1,7 @@
 
+import {
+  Dimensions
+} from 'react-native'
 const drakColor='#455A64'
 const primaryColor='#607D8B'
 const lightColor='#CFD8DC'
@@ -25,8 +28,12 @@ const yyArray=[
 export {yyArray}
 
 const departmentArray=[
-  {key:1,name:'neike1',children:[{name:'ni',key:'1'},{name:'ni2',key:'2'}]},
-  {key:2,name:'neike1',children:[{name:'ni2',key:'2'},{name:'ni3',key:'3'}]}
+  {key:1,name:'内科',children:[{name:'呼吸内科',key:'1'},{name:'消化内科',key:'2'},{name:"泌尿内科",key:3}]},
+  {key:2,name:'外科',children:[{name:'普外科',key:'2'},{name:'骨科',key:'3'}]}
 
 ]
 export {departmentArray}
+
+// 56 is toolbar height
+const viewH=Dimensions.get('window').height-56
+export {viewH}

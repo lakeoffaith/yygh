@@ -22,6 +22,8 @@ export default class DepartmentList extends React.Component {
             }
         }
         componentDidMount(){
+          // choose first item
+          this.state.data[0].onPressed=true;
           this.setState({
             DS:this.state.DS.cloneWithRows(this.state.data),
             childrenData:this.state.data[0] && this.state.data[0].children
@@ -43,11 +45,11 @@ export default class DepartmentList extends React.Component {
         _renderRow=(item)=>{
           return (
             <TouchableOpacity onPress={()=>this._pressRow(item)}>
-                <View style={{height:60,alignItems:'center',backgroundColor:'white',flexDirection:'row',borderBottomWidth:0.5,justifyContent:'center'}}>
+                <View style={{height:60,alignItems:'center',backgroundColor:item.onPressed?'white':lightColor,flexDirection:'row',borderBottomWidth:0.5,justifyContent:'center'}}>
                     {item.onPressed?
                       <View style={{width:20,position:'absolute',left:5,top:20}}><Icon name="play-arrow" size={18}/></View>
                       :null}
-                    <View><Text style={{color:primaryText}}>{item.name}</Text></View>
+                    <View ><Text style={{color:primaryText}}>{item.name}</Text></View>
                 </View>
             </TouchableOpacity>
 
@@ -62,6 +64,7 @@ export default class DepartmentList extends React.Component {
                 <View style={{flexDirection:'row'}}>
                     <View style={{width:120,height:h-60,backgroundColor:lightColor}}>
                         <ListView
+
                           dataSource={this.state.DS}
                           renderRow={this._renderRow}/>
                     </View>

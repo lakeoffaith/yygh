@@ -6,7 +6,7 @@ import{
     StyleSheet,
     TouchableWithoutFeedback
 } from 'react-native'
-import {MKRadioButton} from 'react-native-material-kit'
+import {MKRadioButton,MKColor} from 'react-native-material-kit'
 import {primaryColor,primaryText,secondaryText,accentColor,dividerColor,lightColor,textIcons} from '../data'
 export default class SureYy extends React.Component{
     static contextTypes={
@@ -18,7 +18,13 @@ export default class SureYy extends React.Component{
     }
     render(){
         return(
+
+
+
+
+
           <View>
+
               <View style={{height:40,marginTop:5,flexDirection:'row',alignItems:'center',borderBottomWidth:0.5}}>
                   <Image source={require('../img/doctor.jpg')} style={{width:20,height:20,borderRadius:10}}/>
                   <View style={{marginLeft:10}}><Text>医生：李大宝</Text></View>
@@ -31,7 +37,7 @@ export default class SureYy extends React.Component{
                   <View style={styles.item}><Text>挂号费:<Text>8元</Text></Text></View>
               </View>
               <View style={{marginTop:5,marginLeft:5,flexDirection:'row',height:30,alignItems:'center'}}>
-                  <MKRadioButton checked={true} />
+                  <MKRadioButton  />
                   <Text style={{color:primaryText}}>已阅读预约平台规则</Text>
               </View>
 
