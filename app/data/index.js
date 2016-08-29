@@ -2,13 +2,13 @@
 import {
   Dimensions
 } from 'react-native'
-const drakColor='#455A64'
-const primaryColor='#607D8B'
-const lightColor='#CFD8DC'
+const drakColor='#0288D1'
+const primaryColor='#03A9F4'
+const lightColor='#B3E5FC'
 const textIcons='#FFFFFF'
 const accentColor='#FFC107'
 const primaryText='#212121'
-const secondaryText='#727272'
+const secondaryText='#757575'
 const dividerColor='#BDBDBD'
 
 export {drakColor,primaryColor,lightColor,textIcons,accentColor,primaryText,secondaryText,dividerColor}

@@ -13,7 +13,7 @@ export default class Doctor extends React.Component{
     }
     _goYy(){
         const {navigator}=this.context;
-        navigator.to('Main.HospitalList.DepartmentList.DoctorList.DoctorShow')
+        navigator.to('Main.DepartmentList.DoctorList.DoctorShow')
     }
     render(){
         return(

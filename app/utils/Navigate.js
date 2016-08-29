@@ -48,7 +48,7 @@ export default class Navigate {
     constructor(navigator) {
         this.navigator = navigator;
         this.savedInstanceStates = new Map();
-        this.currentRoute = null;
+        this.currentRoute = Navigate.getInitialRoute();
         this.previousRoute = null;
         this.isChild = false;
         BackAndroid.addEventListener('hardwareBackPress', this._hardwareBackPress);
@@ -167,6 +167,7 @@ export default class Navigate {
                 const route = {
                     title: title ? title : (obj.title ? obj.title : ' '),
                     path,
+                    selfToolbar:obj.selfToolbar,
                     actions:obj.actions,
                     component: obj.component,
                     props
@@ -197,6 +198,7 @@ export default class Navigate {
                 // title: title ? title : (obj.title ? obj.title : ' '),
                 title: title ? title : (obj.title ? obj.title : ' '),
                 path,
+                selfToolbar:obj.selfToolbar,
                 actions:obj.actions,
                 component: obj.component,
                 props

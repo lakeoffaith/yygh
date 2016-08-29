@@ -17,7 +17,7 @@ export default class doctorShow extends React.Component{
 
     _goSureYy(){
         const {navigator}=this.context;
-        navigator.to('Main.HospitalList.DepartmentList.DoctorList.DoctorShow.SureYy')
+        navigator.to('Main.DepartmentList.DoctorList.DoctorShow.SureYy')
     }
     render(){
         const _this=this;

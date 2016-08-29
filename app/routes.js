@@ -3,33 +3,24 @@ export default {
     Main:{
         initialRoute: true,
         title:' ',
-        component:require('./Main').default,
-        actions:[{icon:'location-on',info:'成都'}],
+        selfToolbar:require('./components/mainToolbar').default,
+        component:require('./hospital/list').default,
         children:{
-            HospitalList:{
-                title:'医院列表',
-                component:require('./hospital/list').default,
+            DepartmentList:{
+                title:'成都军区医院',
+                component:require('./department/list').default,
                 children:{
-                  search:{
-                    component:require('./search').default
-                  },
-                    DepartmentList:{
-                        title:'成都军区医院',
-                        component:require('./department/list').default,
+                    DoctorList:{
+                        title:'心血管内科',
+                        component:require('./doctor/list').default,
                         children:{
-                            DoctorList:{
-                                title:'心血管内科',
-                                component:require('./doctor/list').default,
+                            DoctorShow:{
+                                title:' ',
+                                component:require('./doctor/show').default,
                                 children:{
-                                    DoctorShow:{
-                                        title:' ',
-                                        component:require('./doctor/show').default,
-                                        children:{
-                                            SureYy:{
-                                                title:'确认预约',
-                                                component:require('./yy/sure').default
-                                            }
-                                        }
+                                    SureYy:{
+                                        title:'确认预约',
+                                        component:require('./yy/sure').default
                                     }
                                 }
                             }

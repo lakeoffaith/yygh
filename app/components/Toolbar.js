@@ -1,5 +1,6 @@
 import React, { Component, PropTypes, } from 'react';
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
+import {primaryColor,accentColor,textIcons,primaryText} from '../data'
 import {
     Text,
     View,
@@ -21,12 +22,20 @@ export default class Toolbar extends Component {
     }
     render() {
         const { navigator } = this.context;
+        if(navigator===null)return null;
+
         const { onIconPress } = this.props;
-        if(navigator){
-            console.log(navigator.currentRoute);
+        if(navigator.currentRoute && !! navigator.currentRoute.selfToolbar && navigator.currentRoute.selfToolbar!==null){
+          if(navigator.currentRoute.selfToolbar==='NO'){
+            return null;
+          }
+          return (
+             <navigator.currentRoute.selfToolbar/>
+          );
         }
         return (
             <MaterialToolbar
+                overrides={{backgroundColor:primaryColor}}
                 title={navigator && navigator.currentRoute ? navigator.currentRoute.title : ' '}
                 primary={'paperBlueGrey'}
                 icon={navigator && navigator.isChild ? 'keyboard-backspace' : 'menu'}

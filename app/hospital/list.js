@@ -36,11 +36,7 @@ export default class HospitalList extends React.Component{
     }
     _goDepartmentList(){
         const {navigator}=this.context;
-        navigator.to('Main.HospitalList.DepartmentList')
-    }
-    _goSearch(){
-      const {navigator} =this.context;
-      navigator.to('Main.HospitalList.search');
+        navigator.to('Main.DepartmentList')
     }
     _renderRow=(item)=>{
 
@@ -66,16 +62,10 @@ export default class HospitalList extends React.Component{
         );
     }
     render(){
-      console.log(viewH);
         return(
             <View>
-                <TouchableWithoutFeedback onPress={()=>this._goSearch()}>
-                <View style={{flexDirection:'row',height:40,alignItems:'center',borderBottomWidth:0.5,borderColor:dividerColor}}>
-                    <Icon style={{marginLeft:25,marginRight:5}} name="search" size={17}/>
-                    <Text style={{color:secondaryText}}>搜索医院,医生,科室,疾病</Text>
-                </View>
-                </TouchableWithoutFeedback>
-                <View style={{height:(viewH-100)}}>
+
+                <View style={{height:viewH}}>
                 <ListView
                   dataSource={this.state.DS}
                   renderRow={this._renderRow}

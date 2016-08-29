@@ -85,7 +85,7 @@ class DetailDep  extends React.Component{
     }
     _goDoctorList(){
         const {navigator}=this.context;
-        navigator.to('Main.HospitalList.DepartmentList.DoctorList')
+        navigator.to('Main.DepartmentList.DoctorList')
     }
     render(){
         const _this=this;
