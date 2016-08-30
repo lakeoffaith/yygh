@@ -12,7 +12,7 @@ import Navigate from './utils/Navigate';
 import Toolbar from './components/Toolbar';
 import Navigation from './scenes/Navigation';
 import Welcome from './Welcome'
-export default class App extends React.Component{
+export default class Index extends React.Component{
     constructor() {
         super();
         this.state= {

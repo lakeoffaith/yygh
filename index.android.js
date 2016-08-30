@@ -2,5 +2,5 @@ import {
     AppRegistry
 }from 'react-native'
 
-import app from './app/App'
-AppRegistry.registerComponent('yygh',()=>app);
+import App from './app/containers/app'
+AppRegistry.registerComponent('yygh',()=>App);

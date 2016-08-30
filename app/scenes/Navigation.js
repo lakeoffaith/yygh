@@ -2,7 +2,8 @@ import React, { Component, PropTypes} from 'react';
 import {
     View,
     Text,
-    Image
+    Image,
+    TouchableWithoutFeedback
 } from 'react-native'
 
 import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-design';
@@ -37,10 +38,12 @@ export default class Navigation extends Component {
         return (
             <Drawer overrides={{}}>
                 <Drawer.Header  backgroundColor={primaryColor}>
-                    <View style={styles.header} >
+                    <TouchableWithoutFeedback onPress={()=>this.changeScene('Login')}>
+                    <View style={styles.header}>
                         <Avatar size={80} image={<Image source={require('../img/user.jpg')}/>} />
                         <Text style={[styles.text, COLOR.paperGrey50, TYPO.paperFontSubhead]}>未登录</Text>
                     </View>
+                    </TouchableWithoutFeedback>
                 </Drawer.Header>
 
                 <Drawer.Section

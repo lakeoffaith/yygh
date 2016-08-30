@@ -33,6 +33,10 @@ export default {
     YyList:{
         title:'挂号预约列表',
         component:require('./yy/list').default
+    },
+    Login:{
+      title:'登录页面',
+      component:require('./login').Login
     }
 
 
