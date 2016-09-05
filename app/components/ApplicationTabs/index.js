@@ -6,6 +6,7 @@ import styles from './styles';
 import Hospital from '../Hospital';
 import { connect } from 'react-redux';
 import { actions as navigationActions } from 'react-native-navigation-redux-helpers';
+import NavigationView from '../NavigationView';
 import TabBar from '../ijoyComponents/tabBar';
 const { jumpTo, pushRoute } = navigationActions;
 
@@ -16,20 +17,12 @@ class ApplicationTabs extends Component {
 				<Hospital />
 			);
 		}
-
-		if (tab.key === 'notifications') {
-			return (
-				<View style={[styles.tabContent, {backgroundColor: 'green'}]} />
-			);
-		}
-
-		if (tab.key === 'settings') {
-			return (
-				<View style={[styles.tabContent, {backgroundColor: 'pink'}]} />
-			);
-		}
 	}
-
+	_renderNavigationView=()=>{
+		return(
+			 <NavigationView />
+		);
+	}
 	render() {
 		const onNavigate = (action) => {
 			this.drawer.closeDrawer();
@@ -40,26 +33,14 @@ class ApplicationTabs extends Component {
 		console.log("--------------");
 		console.log(navigation);
 		//navigationView 为MenuNavigation的路径，点击的时候，选择push到这样就是后退的时候就是主页面了。
-		const navigationView = (
-			<View style={{flex: 1, backgroundColor: '#fff'}}>
 
-						<TouchableHighlight
-							onPress={ () => onNavigate(pushRoute({
-								key: 'new',
-								title: 'Main Screen',
-								showBackButton: true
-							},'global')) }>
-							<Text>菜单</Text>
-						</TouchableHighlight>
-			</View>
-		);
 
 		return (
 			<DrawerLayoutAndroid
 				ref={(drawer) => { this.drawer = drawer; }}
 				drawerWidth={300}
 				drawerPosition={DrawerLayoutAndroid.positions.Left}
-				renderNavigationView={() => navigationView}>
+				renderNavigationView={this._renderNavigationView}>
 				{this._renderApp()}
 			</DrawerLayoutAndroid>
 		);
@@ -67,18 +48,13 @@ class ApplicationTabs extends Component {
   _openDrawer=()=>{
 		this.drawer.openDrawer();
 	}
+		//
 	_renderApp() {
 		const selectedTab = this.props.navigation.routes[this.props.navigation.index];
-		const actions = [{
-			title: 'New Item',
-			icon: { uri: 'http://facebook.github.io/react/img/logo_og.png' },
-			show: 'always',
-			showWithText: false
-		}];
 		return (
 			<View style={{ flex: 1 }}>
-				<TabBar openDrawer={this._openDrawer}/>
-				<View style={{marginTop:56}}>
+					<TabBar openDrawer={this._openDrawer}/>
+				<View>
 					{this._renderTabContent(selectedTab)}
     		</View>
 			</View>

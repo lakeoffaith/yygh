@@ -11,7 +11,10 @@ import { connect } from 'react-redux';
 import ApplicationTabs from '../ApplicationTabs';
 import { actions } from 'react-native-navigation-redux-helpers';
 import Toolbar from '../ijoyComponents/toolbar';
-
+import DepartmentList from '../Department';
+import DoctorList from '../Doctor';
+import DoctorShow from '../Doctor/show';
+import SureYy from '../Yy/sure'
 const {
   popRoute
 } = actions;
@@ -62,6 +65,38 @@ class GlobalNavigation extends Component {
 				</View>
 			);
 		}
+    if(props.scene.route.key==='departmentList'){
+      return (
+        <View style={{flex:1}}>
+             {toolBar }
+           <DepartmentList />
+        </View>
+      )
+    }
+    if(props.scene.route.key==='doctorList'){
+      return(
+         <View style={{flex:1}}>
+            {toolBar}
+            <DoctorList />
+         </View>
+      );
+    }
+    if(props.scene.route.key==='doctorShow'){
+      return(
+         <View style={{flex:1}}>
+            {toolBar}
+            <DoctorShow />
+         </View>
+      );
+    }
+    if(props.scene.route.key==='sureYy'){
+      return(
+         <View style={{flex:1}}>
+            {toolBar}
+            <SureYy />
+         </View>
+      );
+    }
     if(props.scene.route.key==='tabDetail'){
       return (
          <View>

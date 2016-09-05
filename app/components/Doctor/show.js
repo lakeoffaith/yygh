@@ -6,18 +6,21 @@ import {
     Dimensions,
     TouchableWithoutFeedback
 } from 'react-native'
-import {yyArray} from '../data'
-import {primaryColor,primaryText,secondaryText,accentColor,dividerColor,lightColor,textIcons} from '../data'
+import {yyArray} from '../../data'
+import {PrimaryColor,Accent,PrimaryText,SecondText,DividerText,LightPrimaryColor,TextIcons} from '../ijoyComponents/color'
+import {connect} from 'react-redux';
+import {actions} from 'react-native-navigation-redux-helpers';
+const {pushRoute}=actions;
 const w=Dimensions.get('window').width;
 const scheduleWidth=parseInt((w-14)/7);
-export default class doctorShow extends React.Component{
+class DoctorShow extends React.Component{
     static contextTypes={
         navigator:React.PropTypes.object.isRequired
     }
 
     _goSureYy(){
-        const {navigator}=this.context;
-        navigator.to('Main.DepartmentList.DoctorList.DoctorShow.SureYy')
+      const {dispatch,globalNavigation}=this.props;
+      dispatch(pushRoute({key:'sureYy',name:'确认预约'},globalNavigation.key));
     }
     render(){
         const _this=this;
@@ -26,17 +29,17 @@ export default class doctorShow extends React.Component{
                <View style={{width:scheduleWidth}}>
                    <View style={{height:50,borderWidth:0.5,justifyContent:'center',alignItems:'center'}}>
                        <View>
-                           <Text style={{color:primaryText}}>{item.date}</Text>
-                           <Text style={{color:primaryText}}>{item.week}</Text>
+                           <Text style={{color:PrimaryText}}>{item.date}</Text>
+                           <Text style={{color:PrimaryText}}>{item.week}</Text>
                        </View>
                    </View>
                    <View style={{height:40,borderWidth:0.5}}>
                        {item.morning?
                            <TouchableWithoutFeedback onPress={()=>_this._goSureYy()}>
-                               <View style={{backgroundColor:accentColor,justifyContent:'center',alignItems:'center'}}>
+                               <View style={{backgroundColor:Accent,justifyContent:'center',alignItems:'center'}}>
                                    <View >
-                                       <Text style={{color:secondaryText}}>{item.type}</Text>
-                                       <Text style={{color:secondaryText}}>{item.morning}</Text>
+                                       <Text style={{color:SecondText}}>{item.type}</Text>
+                                       <Text style={{color:SecondText}}>{item.morning}</Text>
                                    </View>
                                </View>
                            </TouchableWithoutFeedback>
@@ -46,10 +49,10 @@ export default class doctorShow extends React.Component{
                    </View>
                    <View style={{height:40,borderWidth:0.5}}>
                        {item.afternoon?
-                           <View style={{backgroundColor:accentColor,justifyContent:'center',alignItems:'center'}}>
+                           <View style={{backgroundColor:Accent,justifyContent:'center',alignItems:'center'}}>
                                <View >
-                                   <Text style={{color:secondaryText}}>{item.type}</Text>
-                                   <Text style={{color:secondaryText}}>{item.afternoon}</Text>
+                                   <Text style={{color:SecondText}}>{item.type}</Text>
+                                   <Text style={{color:SecondText}}>{item.afternoon}</Text>
                                </View>
                             </View>
                            :
@@ -61,17 +64,17 @@ export default class doctorShow extends React.Component{
         });
         return(
             <View>
-                <View style={{flexDirection:'row',height:120,padding:10,paddingTop:30,backgroundColor:primaryColor}}>
+                <View style={{flexDirection:'row',height:120,padding:10,paddingTop:30,backgroundColor:PrimaryColor}}>
                     <View style={{marginLeft:10,alignItems:'center'}}>
-                        <Image source={require('../img/doctor.jpg')} style={{width:60,height:60,borderRadius:30}}/>
+                        <Image source={require('../../img/doctor.jpg')} style={{width:60,height:60,borderRadius:30}}/>
                     </View>
                     <View style={{flex:1,marginLeft:10}}>
-                        <Text><Text style={{color:primaryText}}>刘大本</Text> <Text style={{color:secondaryText}}>主任医师</Text></Text>
-                        <Text style={{color:secondaryText}}>成都军区</Text>
-                        <Text style={{color:secondaryText}}>心血管内科</Text>
+                        <Text><Text style={{color:PrimaryText}}>刘大本</Text> <Text style={{color:SecondText}}>主任医师</Text></Text>
+                        <Text style={{color:SecondText}}>成都军区</Text>
+                        <Text style={{color:SecondText}}>心血管内科</Text>
                         <View style={{position:'absolute',right:5,bottom:15}}>
-                            <Text style={{color:primaryText}}>90</Text>
-                            <Text style={{color:secondaryText}}>预约量</Text>
+                            <Text style={{color:PrimaryText}}>90</Text>
+                            <Text style={{color:SecondText}}>预约量</Text>
                         </View>
                     </View>
                 </View>
@@ -89,3 +92,15 @@ export default class doctorShow extends React.Component{
         );
     }
 }
+
+function mapDispatchToProps(dispatch){
+  return{
+    dispatch
+  };
+}
+function mapStateToProps(state){
+  return{
+    globalNavigation:state.get('globalNavigation')
+  };
+}
+export default connect(mapStateToProps,mapDispatchToProps)(DoctorShow);

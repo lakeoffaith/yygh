@@ -8,9 +8,13 @@ import {
     TouchableOpacity
 }from 'react-native'
 import {Icon} from 'react-native-material-design'
-import {primaryText,secondaryText,accentColor,dividerColor,lightColor} from '../data'
+import {connect} from 'react-redux';
+import {actions} from 'react-native-navigation-redux-helpers';
+const {pushRoute}=actions;
+import {PrimaryColor,Accent,PrimaryText,SecondText,DividerText,LightPrimaryColor} from '../ijoyComponents/color'
+import DetailDep from './detail'
 const h=Dimensions.get('window').height;
-import {departmentArray} from "../data"
+import {departmentArray} from "../../data"
 export default class DepartmentList extends React.Component {
         constructor() {
             super();
@@ -45,11 +49,11 @@ export default class DepartmentList extends React.Component {
         _renderRow=(item)=>{
           return (
             <TouchableOpacity onPress={()=>this._pressRow(item)}>
-                <View style={{height:60,alignItems:'center',backgroundColor:item.onPressed?'white':lightColor,flexDirection:'row',borderBottomWidth:0.5,justifyContent:'center'}}>
+                <View style={{height:60,alignItems:'center',backgroundColor:item.onPressed?'white':LightPrimaryColor,flexDirection:'row',borderBottomWidth:0.5,justifyContent:'center'}}>
                     {item.onPressed?
                       <View style={{width:20,position:'absolute',left:5,top:20}}><Icon name="play-arrow" size={18}/></View>
                       :null}
-                    <View ><Text style={{color:primaryText}}>{item.name}</Text></View>
+                    <View ><Text style={{color:PrimaryText}}>{item.name}</Text></View>
                 </View>
             </TouchableOpacity>
 
@@ -59,10 +63,9 @@ export default class DepartmentList extends React.Component {
 
 
         render(){
-          console.log("STATE:",this.state);
             return (
                 <View style={{flexDirection:'row'}}>
-                    <View style={{width:120,height:h-60,backgroundColor:lightColor}}>
+                    <View style={{width:120,height:h-60,backgroundColor:LightPrimaryColor}}>
                         <ListView
 
                           dataSource={this.state.DS}
@@ -73,34 +76,3 @@ export default class DepartmentList extends React.Component {
             );
         }
     }
-
-
-
-class DetailDep  extends React.Component{
-    static propTypes={
-        data:React.PropTypes.array.isRequired
-    }
-    static contextTypes = {
-        navigator: React.PropTypes.object.isRequired
-    }
-    _goDoctorList(){
-        const {navigator}=this.context;
-        navigator.to('Main.DepartmentList.DoctorList')
-    }
-    render(){
-        const _this=this;
-       return(
-           <View>
-               {this.props.data.map(function(item,i){
-                    return (
-                             <TouchableOpacity onPress={()=>_this._goDoctorList()}>
-                                <View key={item.key} style={{height:50,marginLeft:20,borderBottomWidth:0.1,padding:10,alignItems:'center',flexDirection:'row'}}>
-                                    <Text style={{color:secondaryText}}>{item.name}</Text>
-                                </View>
-                            </TouchableOpacity>
-               );
-               })}
-           </View>
-       );
-    }
-}

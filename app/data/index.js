@@ -2,16 +2,7 @@
 import {
   Dimensions
 } from 'react-native'
-const drakColor='#0288D1'
-const primaryColor='#03A9F4'
-const lightColor='#B3E5FC'
-const textIcons='#FFFFFF'
-const accentColor='#FFC107'
-const primaryText='#212121'
-const secondaryText='#757575'
-const dividerColor='#BDBDBD'
 
-export {drakColor,primaryColor,lightColor,textIcons,accentColor,primaryText,secondaryText,dividerColor}
 
 
 
@@ -33,7 +24,3 @@ const departmentArray=[
 
 ]
 export {departmentArray}
-
-// 56 is toolbar height
-const viewH=Dimensions.get('window').height-56
-export {viewH}

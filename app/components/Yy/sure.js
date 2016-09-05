@@ -7,26 +7,21 @@ import{
     TouchableWithoutFeedback
 } from 'react-native'
 import {MKRadioButton,MKColor} from 'react-native-material-kit'
-import {primaryColor,primaryText,secondaryText,accentColor,dividerColor,lightColor,textIcons} from '../data'
-export default class SureYy extends React.Component{
-    static contextTypes={
-        navigator:React.PropTypes.object.isRequired
-    }
+import {PrimaryColor,Accent,PrimaryText,SecondText,DividerText,LightPrimaryColor,TextIcons} from '../ijoyComponents/color'
+import {connect} from 'react-redux';
+import {actions} from 'react-native-navigation-redux-helpers';
+const {pushRoute,jumpToIndex,reset}=actions;
+ class SureYy extends React.Component{
+
     _goMain(){
-        const {navigator} =this.context;
-        navigator.to('Main');
+      const {dispatch,globalNavigation}=this.props;
+      dispatch(reset([{key:'applicationTabs',index:globalNavigation.routes[0].index}],globalNavigation.key,0));
     }
     render(){
         return(
-
-
-
-
-
           <View>
-
               <View style={{height:40,marginTop:5,flexDirection:'row',alignItems:'center',borderBottomWidth:0.5}}>
-                  <Image source={require('../img/doctor.jpg')} style={{width:20,height:20,borderRadius:10}}/>
+                  <Image source={require('../../img/doctor.jpg')} style={{width:20,height:20,borderRadius:10}}/>
                   <View style={{marginLeft:10}}><Text>医生：李大宝</Text></View>
               </View>
               <View style={{marginLeft:5}}>
@@ -38,13 +33,13 @@ export default class SureYy extends React.Component{
               </View>
               <View style={{marginTop:5,marginLeft:5,flexDirection:'row',height:30,alignItems:'center'}}>
                   <MKRadioButton  />
-                  <Text style={{color:primaryText}}>已阅读预约平台规则</Text>
+                  <Text style={{color:PrimaryText}}>已阅读预约平台规则</Text>
               </View>
 
                   <View style={{alignItems:'center',marginTop:40}}>
                       <TouchableWithoutFeedback onPress={()=>this._goMain()}>
-                          <View style={{width:140,height:50,borderRadius:10,justifyContent:'center',alignItems:'center',backgroundColor:accentColor}}>
-                              <Text style={{color:textIcons ,fontSize:16}}>预约</Text>
+                          <View style={{width:140,height:50,borderRadius:10,justifyContent:'center',alignItems:'center',backgroundColor:Accent}}>
+                              <Text style={{color:TextIcons ,fontSize:16}}>预约</Text>
                           </View>
                       </TouchableWithoutFeedback>
                   </View>
@@ -53,6 +48,17 @@ export default class SureYy extends React.Component{
         );
     }
 }
+function mapDispatchToProps(dispatch){
+  return{
+    dispatch
+  };
+}
+function mapStateToProps(state){
+  return{
+    globalNavigation:state.get('globalNavigation')
+  };
+}
+export default connect(mapStateToProps,mapDispatchToProps)(SureYy);
 const styles=StyleSheet.create({
   item:{
     height:40,
