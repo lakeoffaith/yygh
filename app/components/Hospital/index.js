@@ -11,7 +11,7 @@ import {primaryText,secondaryText,accentColor,dividerColor} from '../data'
 import {viewH} from '../data'
 import DataRepository from '../data/DataRepository'
 const repository=new DataRepository();
-export default class HospitalList extends React.Component{
+export default class Hospital extends React.Component{
     constructor(){
       super();
       const ds=new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2});
