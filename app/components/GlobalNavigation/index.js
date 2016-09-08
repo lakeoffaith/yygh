@@ -15,8 +15,16 @@ import DepartmentList from '../Department';
 import DoctorList from '../Doctor';
 import DoctorShow from '../Doctor/show';
 import SureYy from '../Yy/sure'
+import Searchbar from '../ijoyComponents/searchbar';
+import Search from '../Search';
+import Login from '../Login';
+import Register from '../Login/register';
+import ForgetPassword from '../Login/forgetPassword';
+import YyList from '../Yy/list';
+import Location from '../Location'
 const {
-  popRoute
+  popRoute,
+  pushRoute
 } = actions;
 
 const {
@@ -56,7 +64,7 @@ class GlobalNavigation extends Component {
 				</View>
 			);
 		}
-    const toolBar=<Toolbar onBack={this._back}/>;
+    const toolBar=<Toolbar onBack={this._back} />;
 
 		if (props.scene.route.key === 'new') {
 			return (
@@ -97,11 +105,59 @@ class GlobalNavigation extends Component {
          </View>
       );
     }
-    if(props.scene.route.key==='tabDetail'){
-      return (
-         <View>
-           <Text>details</Text>
+    if(props.scene.route.key==='yyList'){
+      return(
+         <View style={{flex:1}}>
+            {toolBar}
+            <YyList />
          </View>
+      );
+    }
+
+    if(props.scene.route.key==='search'){
+      return (
+         <View style={{flex:1}}>
+           <Searchbar onBack={this._back} />
+           <Search />
+         </View>
+      );
+    }
+    if(props.scene.route.key==='login'){
+      return (
+        <View style={{flex:1}}>
+             {toolBar }
+           <Login
+           goRegister={()=>this._push({key:'register',name:'注册用户'})}
+            goForgetPassword={()=>this._push({key:'forgetPassword',name:'忘记密码'})}
+           />
+        </View>
+      );
+    }
+    if(props.scene.route.key==='register'){
+      return (
+        <View style={{flex:1}}>
+             {toolBar }
+           <Register
+           />
+        </View>
+      );
+    }
+    if(props.scene.route.key==='forgetPassword'){
+      return (
+        <View style={{flex:1}}>
+             {toolBar }
+           <ForgetPassword
+           />
+        </View>
+      );
+    }
+    if(props.scene.route.key==='location'){
+      return (
+        <View style={{flex:1}}>
+             {toolBar }
+           <Location
+           />
+        </View>
       );
     }
 	}
@@ -112,6 +168,11 @@ class GlobalNavigation extends Component {
   _back=()=>{
     const {dispatch,navigation}=this.props;
     dispatch(popRoute(navigation.key));
+  }
+
+  _push=(route)=>{
+    const {dispatch,navigation}=this.props;
+    dispatch(pushRoute(route,navigation.key));
   }
 }
 

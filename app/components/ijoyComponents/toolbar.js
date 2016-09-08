@@ -9,12 +9,18 @@ import{
  */
 import {PrimaryColor,Accent,PrimaryText,SecondText,DividerText} from './color';
 import {Toolbar as MaterialToolbar} from 'react-native-material-design';
-export default class Toolbar extends Component{
+import { connect } from 'react-redux';
+class Toolbar extends Component{
   render(){
+
+    const {navigation}=this.props;
+    const currentRoute=navigation.routes[navigation.index]
+    console.log('}}}}}}}}}}}}');
+    console.log(navigation);
     return(
       <View style={styles.toolbar}>
       <MaterialToolbar
-         title={'子菜单'}
+         title={currentRoute && currentRoute.name!==null?currentRoute.name:''}
          icon={'keyboard-backspace'}
          onIconPress={()=>this.props.onBack()}
       />
@@ -26,6 +32,21 @@ export default class Toolbar extends Component{
 Toolbar.propTypes={
   onBack:React.PropTypes.func.isRequired
 };
+
+function mapDispatchToProps(dispatch) {
+	return {
+		dispatch
+	};
+}
+
+function mapStateToProps(state) {
+	return {
+		navigation: state.get('globalNavigation')
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
+
 const styles=StyleSheet.create({
   toolbar: {
      height: 56,

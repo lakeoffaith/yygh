@@ -23,4 +23,9 @@ const departmentArray=[
   {key:2,name:'外科',children:[{name:'普外科',key:'2'},{name:'骨科',key:'3'}]}
 
 ]
-export {departmentArray}
+const cityArray=[
+  {key:1,name:'四川',children:[{name:'成都',key:'1'},{name:'广水',key:'2'},{name:"德阳",key:3}]},
+  {key:2,name:'湖北',children:[{name:'武汉',key:'2'},{name:'锦州',key:'3'}]}
+
+]
+export {departmentArray,cityArray}
