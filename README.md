@@ -1,8 +1,4 @@
 
 
-##v3 branch
-
-结合redux ,NavigationExperimental
-
-
-微信登录，注册
+##time line
+2016-09-21    城市定位，选择，登录，注册

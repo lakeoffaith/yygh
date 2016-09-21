@@ -16,7 +16,9 @@ import GiftedListView from 'react-native-gifted-listview';
 import {PrimaryColor,Accent,PrimaryText,SecondText,DividerText} from '../ijoyComponents/color'
 import {Icon} from 'react-native-material-design';
 import {bindActionCreators} from 'redux';
-import {loadDataSource} from './actions'
+import {loadDataSource} from './actions';
+
+import  {HOSPITALLISTURL} from '../../data/rap'
 const repository=new DataRepository();
 const {
   popRoute,
@@ -28,12 +30,13 @@ const {
 	CardStack: NavigationCardStack
 } = NavigationExperimental;
  class Hospital extends React.Component{
+   //317为成都的id
     _fetchHospital=()=>{
+      const url=HOSPITALLISTURL+"?"+"id="+"317"
    		const {dispatch,actions}=this.props;
-   		repository.fetchHospital({'id':317})
-   		.then((dataArray)=>{
-   		    actions.loadDataSource(dataArray);
-   			console.log(dataArray);
+   		repository._getFetch(url)
+   		.then((responseData)=>{
+   		    actions.loadDataSource(responseData.result);
    		})
    		.catch((error)=>{
    			console.log(error);

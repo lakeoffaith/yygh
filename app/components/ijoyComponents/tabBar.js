@@ -8,8 +8,53 @@ import {
 }from 'react-native';
 import {PrimaryColor,Accent,TextIcons,PrimaryText} from './color'
 import {Icon} from 'react-native-material-design'
-export default class TabBar extends Component{
+import {connect} from 'react-redux';
+import AMapLocation from 'react-native-amap-location';
+ class TabBar extends Component{
+   constructor(){
+     super();
+     this.state={
+       cityParams:null
+     }
+   }
+   componentDidMount() {
+     if(this.state.cityParams===null ){
+       this.listener = AMapLocation.addEventListener((data) => {
+         this.setState({cityParams:'0^'+data.city});
+       });
+       AMapLocation.startLocation({
+         accuracy: 'HighAccuracy',
+         killProcess: true,
+         needDetail: true,
+       })
+     }
+  }
+
+   static propTypes={
+     openDrawer:React.PropTypes.func.isRequired,
+     goSearch:React.PropTypes.func.isRequired,
+     goLocation:React.PropTypes.func.isRequired
+   }
+   componentWillReceiveProps(nextProps){
+     const {cityParams}=this.props;
+     const {cityParams:nextCityParams}=nextProps;
+     if(nextCityParams!==this.state.cityParams){
+       this.setState({cityParams:nextCityParams});
+     }
+   }
   render(){
+    var cityName="未知";
+    if(this.state.cityParams!==null){
+        AMapLocation.stopLocation();
+        this.listener.remove();
+       let array=this.state.cityParams.split('^');
+       cityName=array[1];
+       if(cityName.substr(cityName.length-1,cityName.length)==='市'){
+         cityName=cityName.substr(0,cityName.length-1);
+       }
+    }
+
+    console.log("tttt");
     return(
       <View style={styles.toolbar}>
           <TouchableWithoutFeedback onPress={()=>this.props.openDrawer()}>
@@ -28,18 +73,27 @@ export default class TabBar extends Component{
           <TouchableWithoutFeedback onPress={()=>{this.props.goLocation()}}>
               <View style={{width:60,flexDirection:'row'}}>
                  <Icon name='room' />
-                 <View style={{alignItems:'center',justifyContent:'center'}}><Text style={{color:Accent}}>成都</Text></View>
+                 <View style={{alignItems:'center',justifyContent:'center'}}><Text style={{color:Accent}}>{cityName}</Text></View>
               </View>
           </TouchableWithoutFeedback>
       </View>
     );
   }
 }
-TabBar.propTypes={
-  openDrawer:React.PropTypes.func.isRequired,
-  goSearch:React.PropTypes.func.isRequired,
-  goLocation:React.PropTypes.func.isRequired
+
+
+function mapDispatchToProps(dispatch){
+  return {
+    dispatch
+  };
 }
+
+function mapStateToProps(state){
+  return {
+    cityParams:state.get('location').cityParams
+  };
+}
+export default connect(mapStateToProps,mapDispatchToProps)(TabBar);
 
 const styles=StyleSheet.create({
   toolbar: {

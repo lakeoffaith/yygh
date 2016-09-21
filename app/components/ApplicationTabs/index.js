@@ -61,7 +61,7 @@ class ApplicationTabs extends Component {
 		const selectedTab = this.props.navigation.routes[this.props.navigation.index];
 		return (
 			<View style={{ flex: 1 }}>
-					<TabBar openDrawer={this._openDrawer} goSearch={this._goSearch} goLocation={this._goLocation}/>
+					<TabBar openDrawer={this._openDrawer} goSearch={this._goSearch} goLocation={this._goLocation} />
 				<View>
 					{this._renderTabContent(selectedTab)}
     		</View>
@@ -90,7 +90,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
 	return {
 		navigation: state.get('tabs'),
-		globalNavigation:state.get('globalNavigation')
+		globalNavigation:state.get('globalNavigation'),
+		params:state.get('location').cityParams
 	};
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationTabs);
