@@ -3,7 +3,7 @@ import { cardStackReducer } from 'react-native-navigation-redux-helpers';
 const initialState = {
 	key: 'hospital',
 	index: 0,
-	lists:[{'excerpt':'1'},{'excerpt':'2'}],
+	lists:null,
 	routes: [
 		{
 			key: 'list',

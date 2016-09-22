@@ -4,7 +4,7 @@ import {
 import DataRepository from  '../../data/DataRepository'
 const repository=new DataRepository();
 import {actions} from 'react-native-navigation-redux-helpers';
-const {popRoute}=actions;
+const {popRoute,jumpTo}=actions;
 import base64 from 'base-64'
 export const LOGIN_REQUEST = 'login.request'
 export const LOGIN_SUCCESS = 'login.success'
@@ -69,7 +69,6 @@ export function register(url,params) {
     // Note: This only works in node.js, use an implementation that works
     // for the platform you're using, e.g.: base64-js for React Native, or
     // btoa() for browsers.
-    const headers=new Headers({"Content-Type":"application/json","Accept":"application/json"});
     return repository._postFetch(
       url,params
     )
@@ -77,7 +76,7 @@ export function register(url,params) {
           //成功
           if(data.code===200){
               dispatch(loginSuccess({name:data.result[0].name,token:data.result[0].token}))
-              dispatch(popRoute('global'))
+              dispatch(jumpTo(0,'global'))
           }else {
             dispatch(loginFailure('返回数据 出错'))
           }

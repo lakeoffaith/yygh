@@ -13,7 +13,11 @@ import {connect} from 'react-redux';
 import {actions} from 'react-native-navigation-redux-helpers';
 const {pushRoute}=actions;
 class NavigationView extends React.Component{
+  static propTypes={
+    closeDrawer:React.PropTypes.func.isRequired
+  }
   _pushMenu=(route)=>{
+    this.props.closeDrawer();
     const {dispatch,globalNavigation}=this.props;
     dispatch(pushRoute(route,globalNavigation.key));
   }

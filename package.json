@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "postinstall": "remotedev-debuger"
+    "postinstall": "remotedev-debugger"
   },
   "dependencies": {
     "base-64": "^0.1.0",
+    "fbjs": "^0.8.4",
+    "fbjs-scripts": "^0.7.1",
     "immutable": "^3.8.1",
     "react": "15.2.1",
     "react-native": "^0.30.0",

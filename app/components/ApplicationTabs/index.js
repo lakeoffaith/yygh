@@ -18,9 +18,14 @@ class ApplicationTabs extends Component {
 			);
 		}
 	}
+	_closeDrawer=()=>{
+		if(this.drawer!==null){
+			this.drawer.closeDrawer();
+		}
+	}
 	_renderNavigationView=()=>{
 		return(
-			 <NavigationView />
+			 <NavigationView closeDrawer={this._closeDrawer}/>
 		);
 	}
 	render() {
@@ -47,6 +52,11 @@ class ApplicationTabs extends Component {
 	}
   _openDrawer=()=>{
 		this.drawer.openDrawer();
+	}
+	_closeDrawer=()=>{
+		if(this.drawer!==null){
+			this.drawer.closeDrawer();
+		}
 	}
 	_goSearch=()=>{
 		const {dispatch,globalNavigation}=this.props;
